@@ -17,7 +17,7 @@ There are two ways to move forward:
 
 This proposal does not  repeat not contemplate starting over with a brand new standard.
 
-![[Pasted image 20221022222130.png]]
+![](Pasted image 20221022222130.png)
 
 To assess the value of a new foundation, we should express the ways of working that cannot be accomodated in the current system.
 
@@ -28,7 +28,7 @@ To assess the value of a new foundation, we should express the ways of working t
 
 ## Layers of Standardization
 
-We propose that a new IFC standard be broken down into three independent, layered standards.
+We propose that a new IFC standard be broken down into three independent, layered standards. This is the heart of the proposal and provides a structure to allow independent concepts to be discussed and agreed in some isolation.
 
 1. Syntax Standard
 	1. Property Sets / Components
@@ -114,7 +114,7 @@ A type definition may optionally specify:
 
 1. The cardinality of each component. (This may also be specified in the component definition.)
 2. Specific values of certain properties in certain components. For example, a IfcWall type definition may require that there be a classification component that references both the IFC classification domain and the IfcWall classification.
-3. More detailed validation rules (e.g. where-rules). It remains to be seen if these are still necessary. They may be. 🤷
+3. More detailed validation rules (e.g. where-rules). It remains to be seen if these are still necessary. They may be.
 
 Types are the basis of semantic validation of IFC entities.
 
@@ -144,7 +144,7 @@ The standard publishing API will make data from standards available in machine-r
 
 ##### Federation API
 
-This API will allow an author to share data federations. A federation (noun!) is a list of specific versions of data containers. See the file *IFC5 Federation* for more detail.
+This API will allow an author to share data federations. A federation (noun!) is a list of specific versions of data containers. See the section *IFC5 Federation* below for more detail.
 
 ##### Workspace API
 
@@ -197,7 +197,7 @@ Issues that a coordinator will need to resolve:
 - data from two publishers is contradictory (e.g. two publishers are publishing conflicting values of a component or parameter)
 - the design doesn't work in real life (e.g. the classic task of architectural coordination)
 
-Statements about the above issues (e.g. an issue exists, or an issue has been resolved) can be made relative to specific **federations** of the data. See the *IFC5 Federation* document.
+Statements about the above issues (e.g. an issue exists, or an issue has been resolved) can be made relative to specific **federations** of the data. See the *IFC5 Federation* section below.
 
 ## Impact on software products
 
@@ -243,7 +243,7 @@ The content of the IFC 4.3 schema can be translated into the structure outlined 
 2. All properties defined by the IFC standard (the `classificationProperties` we ignored in step 1) will be organized into property sets / components. These will be organized by function / system / discipline, not by classification.
 3. For each IFC type, a type will be defined by reference to its classification, the required components and the rules
 
-Please refer to the *IfcWall Worked Example* file to see how this might look.
+Please refer to the *IfcWall Worked Example* below to see how this might look.
 
 
 ### OO constraints that we don't care about

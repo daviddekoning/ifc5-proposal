@@ -22,9 +22,10 @@ In addition, each party keeps two tags up to date: a `wip` tag that points to th
 
 A **federation** might look something like this:
 
+```
 {
-name: "Issued for Review, 2022-10-24",
-data-sources: [
+"name": "Issued for Review, 2022-10-24",
+"data-sources": [
 	{"uri": "https://architect.com/projectxyz",
 	"version": "2022-10-02 01:34:56",
 	"hash": "2ldkjf0293944j2lk34jriod90s"},
@@ -37,6 +38,7 @@ data-sources: [
 	"hash": "wdloiwjrj30942ufg9asud32h2"}
 ]
 }
+```
 
 The **federation** is relatively simple. It contains a name that describes the data and a list of data sources. Each data source is identified by it's uri, version and optional query. A hash of the data is included so that if a publisher changes the contents of a particular version, all other parties will be able to detect the discrepancy.
 
