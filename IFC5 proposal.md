@@ -35,7 +35,7 @@ We propose that a new IFC standard be broken down into three independent, layere
 	2. Data containers
 2. Semantic Standard
 	1. Component Definitions
-	2. Classification Definitions
+	2. Classification / Property Set Definitions
 	3. Type Definitions
 4. Operational Standard
 	1. Versionning convention
