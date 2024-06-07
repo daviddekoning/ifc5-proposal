@@ -1,0 +1,33 @@
+#usda 1.0
+(
+    defaultPrim = "Project"
+)
+
+over "Project" {
+    over "Centreline" {
+        over "Station1" {
+            def IfcWall "Wall"(
+                references = </Items/sound_barrier_light>
+            )
+            {
+
+            }
+        }
+        over "Station2" {
+            def IfcWall "Wall"(
+                references = </Items/sound_barrier_light>
+            )
+            {
+
+            }
+        }
+        over "Station3" {
+            def IfcWall "Wall"(
+                references = </Items/sound_barrier_light>
+            )
+            {
+
+            }
+        }
+    }
+}

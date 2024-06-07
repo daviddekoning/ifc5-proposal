@@ -1,0 +1,255 @@
+#usda 1.0
+(
+    defaultPrim = "Project"
+    doc = """Generated from Composed Stage of root layer c:\\Users\\David.deKoning\\Documents\\Code Working\\ifc5-proposal\\usd-experiments\\marshalled-alignment\\coordination.usd
+"""
+)
+
+class "Champ_de_Mars"
+{
+    class IfcWall "Wall_2"
+    {
+        def IfcMesh "geom"
+        {
+            bool changed = 1
+        }
+
+        def IfcWindow "window1"
+        {
+            string window_quality = "very good"
+            double3 xformOp:translate = (2, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+
+        def IfcWindow "window2"
+        {
+            double3 xformOp:translate = (6, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+    }
+
+    class IfcWall "Wall_1"
+    {
+        def IfcMesh "geom"
+        {
+            bool changed = 1
+        }
+
+        def IfcWindow "window1"
+        {
+            double3 xformOp:translate = (2, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+
+        def IfcWindow "window2"
+        {
+            double3 xformOp:translate = (6, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+    }
+
+    class IfcWall "Wall_3"
+    {
+        def IfcMesh "geom"
+        {
+            bool changed = 1
+        }
+
+        def IfcWindow "window1"
+        {
+            double3 xformOp:translate = (2, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+
+        def IfcWindow "window2"
+        {
+            double3 xformOp:translate = (6, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+    }
+}
+
+class "Items"
+{
+    class IfcWall "sound_barrier"
+    {
+        def Mesh "geom"
+        {
+            bool changed = 0
+        }
+    }
+
+    class IfcWindow "highway_window"
+    {
+        def DetailedMesh "geom"
+        {
+            string detail = "so much detail"
+        }
+    }
+
+    class IfcWall "sound_barrier_light"
+    {
+        def IfcMesh "geom"
+        {
+            bool changed = 1
+        }
+
+        def IfcWindow "window1"
+        {
+            double3 xformOp:translate = (2, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+
+        def IfcWindow "window2"
+        {
+            double3 xformOp:translate = (6, 0, 2)
+
+            def DetailedMesh "geom"
+            {
+                string detail = "so much detail"
+            }
+        }
+    }
+}
+
+def IfcProject "Project"
+{
+    string name = "Route 66 Upgrade"
+
+    def Alignment "Centreline"
+    {
+        double3 xformOp:translate = (5, 0, 0)
+
+        def XForm "Station1"
+        {
+            double station = 100
+            double3 xformOp:translate = (100, 3, 4)
+
+            def IfcWall "Wall"
+            {
+                def IfcMesh "geom"
+                {
+                    bool changed = 1
+                }
+
+                def IfcWindow "window1"
+                {
+                    double3 xformOp:translate = (2, 0, 2)
+
+                    def DetailedMesh "geom"
+                    {
+                        string detail = "so much detail"
+                    }
+                }
+
+                def IfcWindow "window2"
+                {
+                    double3 xformOp:translate = (6, 0, 2)
+
+                    def DetailedMesh "geom"
+                    {
+                        string detail = "so much detail"
+                    }
+                }
+            }
+        }
+
+        def XForm "Station2"
+        {
+            double station = 200
+            double3 xformOp:translate = (200, 3, 4)
+
+            def IfcWall "Wall"
+            {
+                def IfcMesh "geom"
+                {
+                    bool changed = 1
+                }
+
+                def IfcWindow "window1"
+                {
+                    string window_quality = "very good"
+                    double3 xformOp:translate = (2, 0, 2)
+
+                    def DetailedMesh "geom"
+                    {
+                        string detail = "so much detail"
+                    }
+                }
+
+                def IfcWindow "window2"
+                {
+                    double3 xformOp:translate = (6, 0, 2)
+
+                    def DetailedMesh "geom"
+                    {
+                        string detail = "so much detail"
+                    }
+                }
+            }
+        }
+
+        def XForm "Station3"
+        {
+            double station = 300
+            double3 xformOp:translate = (250, 3, 4)
+
+            def IfcWall "Wall"
+            {
+                def IfcMesh "geom"
+                {
+                    bool changed = 1
+                }
+
+                def IfcWindow "window1"
+                {
+                    double3 xformOp:translate = (2, 0, 2)
+
+                    def DetailedMesh "geom"
+                    {
+                        string detail = "so much detail"
+                    }
+                }
+
+                def IfcWindow "window2"
+                {
+                    double3 xformOp:translate = (6, 0, 2)
+
+                    def DetailedMesh "geom"
+                    {
+                        string detail = "so much detail"
+                    }
+                }
+            }
+        }
+    }
+}
+

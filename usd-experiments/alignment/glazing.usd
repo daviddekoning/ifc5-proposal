@@ -1,0 +1,21 @@
+#usda 1.0
+(
+    defaultPrim = "Project"
+)
+
+over "Project"
+{
+    over "Centreline"
+    {
+        over "Station2"
+        {
+            over "Wall"
+            {
+                over "window1"
+                {
+                    string window_quality = "very good"
+                }
+            }
+        }
+    }
+}

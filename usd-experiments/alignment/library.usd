@@ -1,0 +1,51 @@
+#usda 1.0
+(
+    defaultPrim = "Project"
+)
+
+class "Items"
+{
+    class IfcWall "sound_barrier"
+    {
+        def Mesh "geom"
+        {
+            bool changed = false
+        }
+    }
+
+    class IfcWindow "highway_window"
+    {
+        def Mesh "geom"
+        {
+
+        }
+    }
+
+    class IfcWall "sound_barrier_light"(
+    
+        references = </Items/sound_barrier>
+    )
+    {
+        def IfcMesh "geom"
+        {
+            bool changed = true
+        }
+
+        def IfcWindow "window1"
+        (
+            references = </Items/highway_window>
+        )
+        {
+            double3 xformOp:translate = (2,0,2)
+        }
+
+         def IfcWindow "window2"
+        (
+            references = </Items/highway_window>
+        )
+        {
+            double3 xformOp:translate = (6,0,2)
+        }
+
+    }
+}
