@@ -1,1 +1,1 @@
-from ecs-syntax import *
+from .ecs-syntax import *

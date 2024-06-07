@@ -3,6 +3,7 @@
 Author: David de Koning (Oasys Software, Arup)
 
 Date: October 22, 2022
+Update: July, 2023
 
 This document synthesizes the discussions in the buildingSMART Technical Room at the BSi Standards Summit in Montreal, October 17-20, 2022 into a proposal for how a new IFC standard could be structured.
 
@@ -31,50 +32,110 @@ To assess the value of a new foundation, we should express the ways of working t
 We propose that a new IFC standard be broken down into three independent, layered standards. This is the heart of the proposal and provides a structure to allow independent concepts to be discussed and agreed in some isolation.
 
 1. Syntax Standard
-	1. Property Sets / Components
-	2. Data containers
+	1. Entities
+	1. Components (Property Sets)
+	2. Collections (Data Containers)
+	3. Scenes (assembling data for use)
 2. Semantic Standard
 	1. Component Definitions
 	2. Classification / Property Set Definitions
 	3. Type Definitions
+	4. Archetype Definitions
 4. Operational Standard
-	1. Versionning convention
+	1. Versioning convention
 	2. APIs for for real-time data provisioning
 
 The syntax standard and the operational standard are domain-independent standards that provide a basis for transmitting information between parties. The syntax and operational standards will be driven by the technical room. The semantic standard is domain-dependent and its development will be driven across all the buildingSMART rooms.
 
 ### Syntax Standard
 
-When we refer to syntax, we are refering to the type and organization that can be enforced by parsing. This document does not propose any specific data format or concrete syntax (but you can imagine that it is expressed in JSON).
+When we refer to syntax, we are referring to the type and organization that can be enforced by parsing. This document does not propose any specific data format or concrete syntax (but you can imagine that it is expressed in JSON).
+
+#### Entities
+
+An entity is the starting point for this data format. An entity is something that is described, but does not do any description itself. An entity is simply a unique identifier (e.g. UUID7). 
 
 #### Components (aka Property Sets)
 
-The fundamental unit of data in an IFC5-based openBIM system will be a component (aka a property set). A component / property set is made up of three things:
+The fundamental unit of data in an IFC5-based openBIM system will be a component (aka a property set). A component is made up of three things:
 
 1. The global identifier of the entity to which the property set applies
-2. A set of properties (key-value pairs). These can be defined in two ways
-	1. A literal set of key-value pairs
-	2. A reference to a template property set (for components / property sets that will be assigned to multiple objects)
-3. An optional reference to a component or property set definition (the component type)
+2. An optional reference to a component definition (the component type)
+3. A set of properties (key-value pairs).
 
-Components can be validated separately based on their syntax and based on their sematics. The syntax check confirms that it has three three items specified above. The sematantic check confirms that the properties meets the requirements of the property set definition (properties are named correctly, properties are present, values have the correct type, etc...). See below.
+Components can be validated separately based on their syntax and based on their semantics. The syntax check confirms that it has three three items specified above. The semantic check confirms that the properties meets the requirements of the component definition (properties are named correctly, properties are present, values have the correct type, etc...). See below, "Semantic Standard".
 
 One way to look at this is that the [Property Sets for Objects](https://standards.buildingsmart.org/MVD/RELEASE/IFC4/ADD2_TC1/RV1_2/HTML/schema/templates/property-sets-for-objects.htm) concept from IFC4.3 becomes the only way to define data on an object. All data is assigned to an entity via an implicit IfcRelDefinesByProperties.
 
-#### Data Containers
+#### Collections
 
-openBIM data will always be transfered in a data container. Data transfers include: saving data to a file, sending data in response to an REST API call, sending data in repsonse to a query, etc...
+openBIM data will always be transferred in a collection. Data transfers include: saving data to a file, sending data in response to an REST API call, sending data in response to a query, etc...
 
-openBIM data containers are a set of components. Nothing more, nothing less. A container may contain:
+openBIM collections are a set of components and some collection-level metadata. Nothing more, nothing less. A container may contain:
 
-1. A single component with a single property (One piece of information about one object)
-2. A set of components (of the same type) that all refer to different entitities (a schedule)
-3. A set of components of different types that all refer to a single entity (a 'full' description of an object)
-4. A set of components of different types referring to many entities (The general case, where a full model is sent. There are many entitities, and lots of rich data about each one)
+1. A set of components of different types referring to many entities (The general case, where a full model is sent. There are many entities, and lots of rich data about each one)
+2. A single component with a single property (One piece of information about one object)
+3. A set of components (of the same type) that all refer to different entities (the data of a schedule)
+4. A set of components of different types that all refer to a single entity (a 'full' description of an object)
+
+In addition to the set of components, collections will also store meta data, such as:
+
+1. Author information (individual, group, firm, etc...)
+2. Version information
+3. Status
+4. Hash of contents
+
+#### Scenes
+
+This system is almost too flexible. Anyone can publish a component that attaches to any entity! How can we prevent people from adding data that they shouldn't? How can we know that a set of data is coordinated, if everyone just gets to say whatever they want?
+
+This is where the concept of a scene comes in. A scene is a list of specific versions of data containers.
+
+Let us consider an example project where three designers are contributing collections:
+
+- an Architect publishes a data container at https://architect.com/projectxyz/
+- an Engineer publishes a data container at https://engineer.com/projectxyz/
+- a Quantity Surveyor publishes a data container at https://qs.com/projectxyz
+
+Each time a data container is published, it is given a unique version ID. for the sake of this example, let us say that the version is the date and time it was published.
+
+In addition, each party keeps two tags up to date: a `wip` tag that points to their latest work-in-progress and a `published` tag that points to the latest version that they are happy to share with the rest of the team.
+
+A scene might look something like this:
+
+```
+{
+"name": "Issued for Review, 2022-10-24",
+"data-sources": [
+	{"uri": "https://architect.com/projectxyz",
+	"version": "2022-10-02 01:34:56",
+	"hash": "2ldkjf0293944j2lk34jriod90s"},
+	{"uri": "https://engineer.com/projectxyz/"",
+	"version": "2022-10-14 21:45:32",
+	"hash": "2llkjdoif02039jfal84h5"},
+	{"uri": "https://qs.com/projectxyz",
+	"query": "Type=Quantity",
+	"version": "2022-10-20 14:13:45",
+	"hash": "wdloiwjrj30942ufg9asud32h2"}
+]
+}
+```
+
+The scene is relatively simple. It contains a name that describes the data and a list of data sources. Each data source is identified by it's uri, version and optional query. A hash of the data is included so that if a publisher changes the contents of a particular version, all other parties will be able to detect the discrepancy.
+
+The query allows a federation to only include some information from a publisher. In the example above, only `Quantity` components are included. The Quantity Surveyors may have published some other data for the team to see that did not need to be included in the data set that is issued for review.
+
+##### Contract vs. Collaboration Scenes
+
+When a scene refers to a named version of a collection, such as `latest` or `published`, the person or team who publish that collection
+
+Though it is possible to share data about any entity by simply publishing components that refer to the entity, it is not possible to add any data to a scene if it refers to specific versions of the collections. A scene is equivalent to the transmittal the accompanies a set of contract documents. These documents are included and nothing else.
+
+The above could be described as a **contract federation**. A **collaboration federation** would look similar except that instead of specific dated versions, it would specify a tag name, such as `wip` or `published`. All team members could point their working environment to such a federation and could (for example) receive notifications when someone pointed the `published` tag to a new data collection.
 
 ### Semantic Standard
 
-The synactic standard above is very simple and comprehensible, but is much too flexible to be able to reliably transfer meaningful information between different parties. A second, semantic layer will allow us to agree on the meaning of the data.
+The syntactic standard above is very simple and comprehensible, but is much too flexible to be able to reliably transfer meaningful information between different parties. A second, semantic layer will allow us to agree on the meaning of the data.
 
 #### Component Definitions
 

@@ -4,7 +4,7 @@ Author: David de Koning (Oasys Software, Arup)
 
 Date: Octover 24, 2022
 
-The entity-component model simplifies the specification of a data standard, allows participants in the standardization to agree incremntally, and allows the IFC4.3 standard to be expressed in this new architecture.
+The entity-component model simplifies the specification of a data standard, allows participants in the standardization to agree incrementally, and allows the IFC4.3 standard to be expressed in this new architecture.
 
 This system is almost too flexible. Anyone can publish a component that attaches to any entity! How can we prevent people from adding data that they shouldn't? How can we know that a set of data is coordinated, if everyone just gets to say whatever they want?
 
